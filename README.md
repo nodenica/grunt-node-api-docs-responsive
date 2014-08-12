@@ -4,7 +4,9 @@ Generate responsive HTML files from NodeJS API Docs
 
 ### Run
 
-    grunt
+    $ npm install
+
+    $ grunt
 
 ### Using
 
