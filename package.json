@@ -9,7 +9,10 @@
     "url": "http://www.mcnallydevelopers.com"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "node",
+    "responsive",
+    "html"
   ],
   "main": "Gruntfile.js",
   "engines": {
