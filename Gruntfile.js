@@ -30,7 +30,7 @@ module.exports = function (grunt) {
     docs: {
       'default_options': {
         options: {
-          version: '0.10.30'
+          version: '0.10.31'
         }
       }
     }
