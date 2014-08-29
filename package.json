@@ -30,5 +30,13 @@
   "dependencies": {
     "marked": "^0.3.2",
     "request": "^2.40.0"
+  },
+  "bugs": {
+    "url": "https://github.com/paulomcnally/grunt-node-api-docs-responsive/issues/new",
+    "email": "paulomcnally@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/paulomcnally/grunt-node-api-docs-responsive.git"
   }
 }
