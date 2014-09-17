@@ -20,7 +20,7 @@ Generate responsive HTML files from NodeJS API Docs
         docs: {
           'default_options': {
             options: {
-              version: '0.10.31' // change me
+              version: '0.10.32' // change me
             }
           }
         }
