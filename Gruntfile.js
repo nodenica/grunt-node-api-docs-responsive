@@ -15,7 +15,7 @@ module.exports = function (grunt) {
     docs: {
       'default_options': {
         options: {
-          version: '0.10.31'
+          version: '0.10.32'
         }
       }
     }
