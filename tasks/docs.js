@@ -66,8 +66,9 @@ module.exports = function (grunt) {
     }
 
     // build file html content
-    var buildHtml = function(markdown) {
-      return htmlHeader + marked(markdown) + htmlFooter;
+    var buildHtml = function(title, markdown) {
+      var header = util.format(htmlHeader, title);
+      return header + marked(markdown) + htmlFooter;
     };
 
     // build index.html file
@@ -117,7 +118,7 @@ module.exports = function (grunt) {
           request(file.url, function(error, response, body) {
             if (!error && response.statusCode === 200) {
               grunt.file.write(options.dest + file.name + '.html',
-                buildHtml(body),
+                buildHtml(file.title, body),
                 {encoding: 'utf8'});
               grunt.log.writeln(file.name + ' Done!');
               if (list[lastIndex].name === file.name) {
