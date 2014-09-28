@@ -6,6 +6,9 @@
  * Licensed under the MIT license.
  */
 'use strict';
+
+var version = '0.11.14';
+
 module.exports = function (grunt) {
   // load all npm grunt tasks
   require('load-grunt-tasks')(grunt);
@@ -15,7 +18,7 @@ module.exports = function (grunt) {
     docs: {
       'default_options': {
         options: {
-          version: '0.10.32',
+          version: version,
           dest: './dest/'
         },
 
@@ -26,7 +29,7 @@ module.exports = function (grunt) {
       files: {
         cwd: './assets',  // set working folder / root to copy
         src: '**/*',           // copy all files and subfolders
-        dest: './dest/assets',    // destination folder
+        dest: './dest/' + version + '/assets',    // destination folder
         expand: true           // required when using cwd
       }
     }

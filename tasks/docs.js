@@ -32,6 +32,7 @@ module.exports = function (grunt) {
     });
 
     grunt.file.mkdir(options.dest);
+    grunt.file.mkdir(options.dest + options.version);
 
     // check if version is empty
     if (options.version === '') {
@@ -79,7 +80,7 @@ module.exports = function (grunt) {
           util.format('<a href="%s.html" class="list-group-item">%s</a>',
             file.name, file.title);
       });
-      grunt.file.write(options.dest + 'index.html',
+      grunt.file.write(options.dest + options.version + '/index.html',
         util.format(htmlIndex, options.version, lines),
         {encoding: 'utf8'});
       grunt.log.writeln('Index Done!');
@@ -117,7 +118,7 @@ module.exports = function (grunt) {
           // write html file
           request(file.url, function(error, response, body) {
             if (!error && response.statusCode === 200) {
-              grunt.file.write(options.dest + file.name + '.html',
+              grunt.file.write(options.dest + options.version + '/' + file.name + '.html',
                 buildHtml(file.title, body),
                 {encoding: 'utf8'});
               grunt.log.writeln(file.name + ' Done!');
