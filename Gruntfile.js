@@ -9,7 +9,7 @@
 
 var version = '0.11.14';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   // load all npm grunt tasks
   require('load-grunt-tasks')(grunt);
   // Project configuration.
@@ -38,5 +38,5 @@ module.exports = function (grunt) {
   grunt.loadTasks('tasks');
   grunt.loadNpmTasks('grunt-contrib-copy');
   // By default, lint and run all tests.
-  grunt.registerTask('default',['docs', 'copy']);
+  grunt.registerTask('default', ['docs', 'copy']);
 };
