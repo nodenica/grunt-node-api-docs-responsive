@@ -1,0 +1,37 @@
+{
+  "name": "grunt-iojs-api-docs",
+  "version": "0.0.1",
+  "description": "Generate HTML files from io.js API Docs",
+  "homepage": "https://github.com/nodenica/grunt-iojs-api-docs.git",
+  "repository": "https://github.com/nodenica/grunt-iojs-api-docs.git",
+  "author": {
+    "name": "Paulo McNally",
+    "email": "paulomcnally@gmail.com",
+    "url": "http://www.nodenica.com"
+  },
+  "keywords": [
+    "gruntplugin",
+    "iojs",
+    "io.js",
+    "html",
+    "responsive",
+    "docs",
+    "api"
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-nodeunit": "~0.3.0",
+    "grunt": "~0.4.2",
+    "jshint-stylish": "~0.1.5",
+    "load-grunt-tasks": "~0.3.0"
+  }
+  "dependencies": {
+    "request": "^2.51.0"
+  }
+}
