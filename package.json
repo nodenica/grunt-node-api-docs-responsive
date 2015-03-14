@@ -24,8 +24,9 @@
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.2",
-    "load-grunt-tasks": "~0.3.0",
-    "grunt-contrib-copy": "^0.5.0"
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "load-grunt-tasks": "~0.3.0"
   },
   "scripts": {
     "docs": "grunt docs"

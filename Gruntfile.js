@@ -7,7 +7,7 @@
  */
 'use strict';
 
-var version = '0.10.36';
+var version = '0.12.0';
 
 module.exports = function(grunt) {
   // load all npm grunt tasks
@@ -32,11 +32,25 @@ module.exports = function(grunt) {
         dest: './dest/' + version + '/assets',    // destination folder
         expand: true           // required when using cwd
       }
+    },
+    clean: [
+      './dest/ionic/'
+    ],
+    //ionic version
+    ionic: {
+      'default_options': {
+        options: {
+          version: version,
+          dest: './dest/ionic/'
+        },
+
+      }
     }
   });
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['docs', 'copy']);
+  grunt.registerTask('default', ['docs', 'copy', 'clean', 'ionic']);
 };
