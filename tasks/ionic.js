@@ -1,10 +1,10 @@
 /*
- * grunt-node-api-docs-responsive
- *
- *
- * Copyright (c) 2014 Paulo McNally
- * Licensed under the MIT license.
- */
+* grunt-node-api-docs-responsive
+*
+*
+* Copyright (c) 2014 Paulo McNally
+* Licensed under the MIT license.
+*/
 
 'use strict';
 var request = require('request');
@@ -23,6 +23,7 @@ module.exports = function (grunt) {
     var options = this.options({
       version: '',
       dest: './dest_ionic/',
+      title: 'Stable',
       template: {
         src: './template/ionic/',
         index: 'index.html'
@@ -43,20 +44,19 @@ module.exports = function (grunt) {
 
     grunt.file.mkdir(options.dest);
 
-    var htmlIndex = grunt.file.read(options.template.src +
-      options.template.index, {encoding: 'utf8'});
+    var htmlIndex = grunt.file.read(options.template.src + options.template.index, {encoding: 'utf8'});
 
     // build index.html file
     var buildIndexHtml = function(files) {
       var lines = '';
       files.forEach(function(file) {
         lines = lines +
-          util.format('<a class="item" href="#/app/stable/%s">%s</a>',
-            file.name, file.title);
+        util.format('<a class="item" href="#/app/stable/%s">%s</a>',
+        file.name, file.title);
       });
       grunt.file.write(options.dest + '/index.html',
-        util.format(htmlIndex, options.version, lines),
-        {encoding: 'utf8'});
+      util.format(htmlIndex, options.title, options.version, lines),
+      {encoding: 'utf8'});
       grunt.log.writeln('Index Done!');
     };
 
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
             var name = obj.text.replace(/^\[.*\]\((.*)\.html\)$/, '$1');
             var title = obj.text.replace(/^\[(.*)\].*/, '$1');
             var url = 'https://raw.githubusercontent.com/joyent/node/v' +
-              options.version + '-release/doc/api/' + name + '.markdown';
+            options.version + '-release/doc/api/' + name + '.markdown';
             var itemObj = {
               name: name,
               title: title,
@@ -95,7 +95,7 @@ module.exports = function (grunt) {
             if (!error && response.statusCode === 200) {
               grunt.file.write(options.dest + '/' + file.name + '.html',
               marked(body),
-                {encoding: 'utf8'});
+              {encoding: 'utf8'});
               grunt.log.writeln(file.name + ' Done!');
               if (list[lastIndex].name === file.name) {
                 buildIndexHtml(list);

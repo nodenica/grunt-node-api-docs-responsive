@@ -40,6 +40,7 @@ module.exports = function(grunt) {
     ionic: {
       'default_options': {
         options: {
+          title: 'stable',
           version: version,
           dest: './dest/ionic/'
         },
