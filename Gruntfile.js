@@ -32,11 +32,26 @@ module.exports = function(grunt) {
         dest: './dest/' + version + '/assets',    // destination folder
         expand: true           // required when using cwd
       }
+    },
+    clean: [
+      './dest/ionic/'
+    ],
+    //ionic version
+    ionic: {
+      'default_options': {
+        options: {
+          title: 'stable',
+          version: version,
+          dest: './dest/ionic/'
+        },
+
+      }
     }
   });
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['docs', 'copy']);
+  grunt.registerTask('default', ['docs', 'copy', 'clean', 'ionic']);
 };
