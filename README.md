@@ -1,5 +1,7 @@
 # grunt-node-api-docs-responsive
 
+> Don't work on node v0.12.x
+
 Generate responsive HTML files from NodeJS API Docs
 
 ### Run
