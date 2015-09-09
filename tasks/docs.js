@@ -16,7 +16,7 @@ module.exports = function (grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('docs', 'Generate HTML files from io.js API Docs', function () {
+  grunt.registerMultiTask('docs', 'Generate HTML files from node.js API Docs', function () {
     var done = this.async();
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
     grunt.file.mkdir(options.dest + options.version + options.assets);
 
     // set base url
-    var urlBase = 'https://iojs.org/download/release/v' + options.version + '/doc/api/';
+    var urlBase = 'https://nodejs.org/download/release/v' + options.version + '/docs/api/';
 
     // call json file content
     request(urlBase + 'index.json', function(error, response, body) {
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
         var list = [
           {
             name: 'index',
-            title: 'io.js v' + options.version + ' Documentation',
+            title: 'node.js v' + options.version + ' Documentation',
             url: urlBase + 'index.html'
           }
         ];
