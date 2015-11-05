@@ -8,7 +8,7 @@
 
 'use strict';
 
-var version = '4.2.0';
+var version = '5.0.0';
 
 module.exports = function(grunt) {
   // load all npm grunt tasks
