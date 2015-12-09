@@ -1,43 +1,37 @@
 {
   "name": "grunt-node-api-docs-responsive",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Generate responsive HTML files from NodeJS API Docs",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/paulomcnally/grunt-node-api-docs-responsive.git"
-  },
+  "homepage": "https://github.com/nodenica/grunt-node-api-docs-responsive.git",
+  "repository": "https://github.com/nodenica/grunt-node-api-docs-responsive.git",
   "author": {
     "name": "Paulo McNally",
     "email": "paulomcnally@gmail.com",
-    "url": "http://www.mcnallydevelopers.com"
+    "url": "http://www.nodenica.com"
   },
   "keywords": [
-    "grunt",
-    "plugin",
+    "gruntplugin",
     "node",
+    "node.js",
+    "html",
     "responsive",
-    "html"
+    "docs",
+    "api"
   ],
   "main": "Gruntfile.js",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": "0.10.40"
   },
   "license": "MIT",
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "load-grunt-tasks": "~3.1.0",
-    "grunt-contrib-copy": "~0.8.0",
-    "grunt-contrib-clean": "^0.6.0"
-  },
-  "scripts": {
-    "docs": "grunt docs"
+    "grunt-contrib-clean": "~0.7.0",
+    "grunt-contrib-jshint": "~0.11.3",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt": "~0.4.2",
+    "jshint-stylish": "~2.1.0",
+    "load-grunt-tasks": "~3.3.0"
   },
   "dependencies": {
-    "marked": "^0.3.3",
-    "request": "^2.54.0"
-  },
-  "bugs": {
-    "url": "https://github.com/paulomcnally/grunt-node-api-docs-responsive/issues/new",
-    "email": "paulomcnally@gmail.com"
+    "request": "^2.51.0"
   }
 }

@@ -1,13 +1,14 @@
 /*
- * grunt-node-api-docs-responsive
- *
- *
- * Copyright (c) 2014 Paulo McNally
- * Licensed under the MIT license.
- */
+* grunt-iojs-api-docs
+* https://github.com/nodenica/grunt-iojs-api-docs.git
+*
+* Copyright (c) 2015 Paulo McNally <paulomcnally@gmail.com>
+* Licensed under the MIT license.
+*/
+
 'use strict';
 
-var version = '0.12.1';
+var version = '5.2.0';
 
 module.exports = function(grunt) {
   // load all npm grunt tasks
@@ -23,35 +24,10 @@ module.exports = function(grunt) {
         },
 
       }
-    },
-    // copy files
-    copy: {
-      files: {
-        cwd: './assets',  // set working folder / root to copy
-        src: '**/*',           // copy all files and subfolders
-        dest: './dest/' + version + '/assets',    // destination folder
-        expand: true           // required when using cwd
-      }
-    },
-    clean: [
-      './dest/ionic/'
-    ],
-    //ionic version
-    ionic: {
-      'default_options': {
-        options: {
-          title: 'stable',
-          version: version,
-          dest: './dest/ionic/'
-        },
-
-      }
     }
   });
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-clean');
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['docs', 'copy', 'clean', 'ionic']);
+  grunt.registerTask('default', ['docs']);
 };

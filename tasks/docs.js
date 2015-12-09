@@ -1,38 +1,29 @@
 /*
- * grunt-node-api-docs-responsive
+ * grunt-iojs-api-docs
+ * https://github.com/nodenica/grunt-iojs-api-docs.git
  *
- *
- * Copyright (c) 2014 Paulo McNally
+ * Copyright (c) 2015 Paulo McNally <paulomcnally@gmail.com>
  * Licensed under the MIT license.
  */
 
 'use strict';
+
 var request = require('request');
-var marked = require('marked');
-var util = require('util');
+var path = require('path');
 
 module.exports = function (grunt) {
 
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('docs',
-  'Generate responsive HTML files from NodeJS API Docs', function () {
+  grunt.registerMultiTask('docs', 'Generate HTML files from node.js API Docs', function () {
     var done = this.async();
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       version: '',
       dest: './dest/',
-      template: {
-        src: './template/',
-        index: 'index.html',
-        header: 'header.html',
-        footer: 'footer.html'
-      }
+      assets: '/assets'
     });
-
-    grunt.file.mkdir(options.dest);
-    grunt.file.mkdir(options.dest + options.version);
 
     // check if version is empty
     if (options.version === '') {
@@ -46,62 +37,47 @@ module.exports = function (grunt) {
       return false;
     }
 
-    // read template files
-    var htmlHeader = grunt.file.read(options.template.src +
-      options.template.header, {encoding: 'utf8'});
-    var htmlFooter = grunt.file.read(options.template.src +
-      options.template.footer, {encoding: 'utf8'});
-    var htmlIndex = grunt.file.read(options.template.src +
-      options.template.index, {encoding: 'utf8'});
-
-    // check if header is empty
-    if (htmlHeader === '') {
-      grunt.log.warn('Error loading header file');
-      return false;
-    }
-
-    // check if footer is empty
-    if (htmlHeader === '') {
-      grunt.log.warn('Error loading header file');
-      return false;
-    }
-
-    // build file html content
-    var buildHtml = function(title, markdown) {
-      var header = util.format(htmlHeader, title);
-      return header + marked(markdown) + htmlFooter;
-    };
-
-    // build index.html file
-    var buildIndexHtml = function(files) {
-      var lines = '';
-      files.forEach(function(file) {
-        lines = lines +
-          util.format('<a href="%s.html" class="list-group-item">%s</a>',
-            file.name, file.title);
-      });
-      grunt.file.write(options.dest + options.version + '/index.html',
-        util.format(htmlIndex, options.version, lines),
-        {encoding: 'utf8'});
-      grunt.log.writeln('Index Done!');
-    };
+    // create directories
+    grunt.file.mkdir(options.dest);
+    grunt.file.mkdir(options.dest + options.version);
+    grunt.file.mkdir(options.dest + options.version + options.assets);
 
     // set base url
-    var urlBase = 'http://nodejs.org/dist/v' + options.version + '/docs/api/';
+    var urlBase = 'https://nodejs.org/download/release/v' + options.version + '/docs/api/';
 
     // call json file content
     request(urlBase + 'index.json', function(error, response, body) {
       if (!error && response.statusCode === 200) {
         var json = JSON.parse(body);
-        var list = [];
+        var list = [
+          {
+            name: 'index',
+            title: 'node.js v' + options.version + ' Documentation',
+            url: urlBase + 'index.html'
+          }
+        ];
+
+        var assetsList = [
+          {
+            url: urlBase + 'assets/style.css'
+          },
+          {
+            url: urlBase + 'assets/sh.css'
+          },
+          {
+            url: urlBase + 'assets/sh_main.js'
+          },
+          {
+            url: urlBase + 'assets/sh_javascript.min.js'
+          }
+        ];
 
         // filter only rows with file name
         json.desc.forEach(function(obj) {
           if (obj.type === 'text') {
             var name = obj.text.replace(/^\[.*\]\((.*)\.html\)$/, '$1');
             var title = obj.text.replace(/^\[(.*)\].*/, '$1');
-            var url = 'https://raw.githubusercontent.com/joyent/node/v' +
-              options.version + '-release/doc/api/' + name + '.markdown';
+            var url = urlBase + name + '.html';
             var itemObj = {
               name: name,
               title: title,
@@ -111,19 +87,38 @@ module.exports = function (grunt) {
           }
         });
 
+
+        // added assets
+
         // last position to list
         var lastIndex = list.length - 1;
 
+        // download assets
+        assetsList.forEach(function(file) {
+          request(file.url, function(error, response, body) {
+            if (!error && response.statusCode === 200) {
+              grunt.file.write(
+                options.dest +
+                options.version +
+                options.assets +
+                '/' +
+                path.basename(file.url),
+              body,
+              {encoding: 'utf8'});
+            }
+          });
+        });
+
+        // download pages
         list.forEach(function(file) {
           // write html file
           request(file.url, function(error, response, body) {
             if (!error && response.statusCode === 200) {
               grunt.file.write(options.dest + options.version + '/' + file.name + '.html',
-                buildHtml(file.title, body),
-                {encoding: 'utf8'});
+              body,
+              {encoding: 'utf8'});
               grunt.log.writeln(file.name + ' Done!');
               if (list[lastIndex].name === file.name) {
-                buildIndexHtml(list);
                 done();
               }
             }
@@ -131,6 +126,7 @@ module.exports = function (grunt) {
         });
       }
     });
+
   });
 
 };
