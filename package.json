@@ -1,6 +1,6 @@
 {
   "name": "grunt-node-api-docs-responsive",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Generate responsive HTML files from NodeJS API Docs",
   "homepage": "https://github.com/nodenica/grunt-node-api-docs-responsive.git",
   "repository": "https://github.com/nodenica/grunt-node-api-docs-responsive.git",
