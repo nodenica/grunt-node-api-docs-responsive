@@ -24,10 +24,32 @@ module.exports = function(grunt) {
         },
 
       }
+    },
+    copy: {
+      main: {
+        files: [
+          // includes files within path
+          {
+            expand: true,
+            cwd: 'dest/' + version,
+            src: [ '*' ],
+            dest: '/home/polin/github/nodenica/node-documentation-android-pro/app/src/main/assets/en'
+          },
+          {
+            expand: true,
+            cwd: 'dest/' + version,
+            src: [ '*' ],
+            dest: '/home/polin/github/nodenica/node-documentation-android-free/app/src/main/assets/en'
+          }
+        ],
+      },
     }
   });
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['docs']);
+  grunt.registerTask('default', [
+    'docs',
+    'copy'
+  ]);
 };
