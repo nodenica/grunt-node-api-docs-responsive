@@ -32,13 +32,13 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: 'dest/' + version,
-            src: [ '*' ],
+            src: [ '**' ],
             dest: '/home/polin/github/nodenica/node-documentation-android-pro/app/src/main/assets/en'
           },
           {
             expand: true,
             cwd: 'dest/' + version,
-            src: [ '*' ],
+            src: [ '**' ],
             dest: '/home/polin/github/nodenica/node-documentation-android-free/app/src/main/assets/en'
           }
         ],
