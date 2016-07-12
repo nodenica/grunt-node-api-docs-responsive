@@ -8,48 +8,54 @@
 
 'use strict';
 
-var version = '6.0.0';
+let version = '6.3.0';
 
-module.exports = function(grunt) {
+module.exports = (grunt) => {
   // load all npm grunt tasks
   require('load-grunt-tasks')(grunt);
+
   // Project configuration.
   grunt.initConfig({
     // Configuration to be run (and then tested).
     docs: {
-      'default_options': {
+      default_options: {
         options: {
           version: version,
-          dest: './dest/'
+          dest: './dest/',
         },
 
-      }
+      },
     },
     copy: {
       main: {
         files: [
-          // includes files within path
           {
             expand: true,
             cwd: 'dest/' + version,
-            src: [ '**' ],
-            dest: '/home/polin/github/nodenica/node-documentation-android-pro/app/src/main/assets/en'
+            src: [
+              '**',
+            ],
+            dest: '/home/polin/github/nodenica/node-documentation-android-pro/app/src/main/assets/en',
           },
           {
             expand: true,
             cwd: 'dest/' + version,
-            src: [ '**' ],
-            dest: '/home/polin/github/nodenica/node-documentation-android-free/app/src/main/assets/en'
-          }
+            src: [
+              '**',
+            ],
+            dest: '/home/polin/github/nodenica/node-documentation-android-free/app/src/main/assets/en',
+          },
         ],
       },
-    }
+    },
   });
+
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
+
   // By default, lint and run all tests.
   grunt.registerTask('default', [
     'docs',
-    'copy'
+    'copy',
   ]);
 };
